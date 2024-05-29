@@ -1,0 +1,53 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ 'demande_operation.title' }}{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('../assets/apiAdresse.js') }}"></script>
+    <script src="{{ asset('../assets/inputFile.js') }}"></script>
+    {% block importmap %}
+        {{ importmap('app') }}
+    {% endblock %}
+{% endblock %}
+
+{% block body %}
+    {% set titre = 'demande_operation.title' %}
+    {% include "base/blueBar.html.twig" %}
+    {% include "base/flash.html.twig" %}
+
+    <div class="formClient">
+        <a href="{{ path('client') }}" class="btnBack btn">{{ 'demande_operation.back_button'}}</a>
+        {{ form_start(form) }}
+        <div>
+            <div class="doubleChamp">
+                {{ form_row(form.client.name) }}
+                {{ form_row(form.client.firstname) }}
+            </div>
+            {{ form_row(form.client.mail) }}
+        </div>
+
+        <div>
+            <p class="titleForm">{{ 'demande_operation.address' }}</p>
+            <div class="doubleChamp">
+                {{ form_row(form.adresse.number) }}
+                {{ form_row(form.adresse.street) }}
+            </div>
+            <div id="adresse-suggestions"></div>
+            <div class="doubleChamp">
+                {{ form_row(form.adresse.city) }}
+                {{ form_row(form.adresse.county) }}
+            </div>
+            {{ form_row(form.adresse.country) }}
+        </div>
+
+        <div>
+            <p class="titleForm">{{ 'demande_operation.request'}}</p>
+            {{ form_row(form.operation.type) }}
+            {{ form_row(form.operation.dateForecast) }}
+            {{ form_row(form.operation.description) }}
+            {{ form_row(form.operation.photo) }}
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
